@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { DB_NAME } from '../utils/constants.js';
+import { DB_NAME } from '../constants.js';
 
 const connectDB = async () => {
     try{
@@ -12,4 +12,17 @@ const connectDB = async () => {
 }
 
 
-export default connectDB();
+export default connectDB()
+.then(() => {
+    app.on('error', (err) => {
+        console.log(`err:`, err);
+        throw err;
+    });
+
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Server is running on port ${process.env.PORT || 8000}`);
+    });
+})
+.catch((error) => {
+    console.error('Database connection error:', error);
+})
