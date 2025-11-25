@@ -1,5 +1,5 @@
 import multer from "multer";
-import fs from "fs";
+import fs from "fs"; // ⬅️ Added to handle file system operations
 import path from "path"; // ⬅️ Added for absolute path resolution
 
 // Use path.resolve for a robust absolute path from the project root
@@ -7,7 +7,7 @@ const uploadDir = path.resolve('./public/temp');
 
 // Ensure the directory exists
 if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
+  fs.mkdirSync(uploadDir, { recursive: true }); // recursive: true to create nested directories if needed
 }
 
 const storage = multer.diskStorage({

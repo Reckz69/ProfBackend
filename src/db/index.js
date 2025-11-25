@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import { DB_NAME } from '../constants.js'
 import app from '../app.js';
 
+// Database connection function
+//Always use async/await with mongoose connection to handle connection properly (databse in different continent may take time to connect)
 const connectDB = async () => {
     try{
         const connectionInstance = await mongoose.connect(`${process.env.MONGO_URI}/${DB_NAME}`);
@@ -14,6 +16,8 @@ const connectDB = async () => {
 
 
 export default connectDB()
+
+//async method returning promise:
 .then(() => {
     app.on('error', (err) => {
         console.log(`err:`, err);

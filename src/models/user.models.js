@@ -3,7 +3,15 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const userSchema = new Schema(
-    {
+    {  username:{
+          type: String,
+            required: true,
+            unique: true,
+            lowercase: true,
+            trim: true, 
+            index: true
+
+      },
        email : {
         type:String,
         required:true,
@@ -43,6 +51,7 @@ const userSchema = new Schema(
     }
 )
 
+//pre-save hook to hash password before saving and if there is any change in password
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
 
@@ -50,27 +59,31 @@ userSchema.pre("save", async function (next) {
     next();
 })
 
+//method to compare password during login
 userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 }
 
+//Access token are short lived tokens used for authenticating user requests to protected routes or resources.
+//Refresh tokens are long lived tokens used to obtain new access tokens without requiring the user to re-authenticate.
 userSchema.methods.generateAccessToken = function () {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
             email: this.email,
             username: this.username,
-            fullname: this.fullname,
+            fullName: this.fullName,
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY || "15m",
         }
     )
+   
 }
 
 userSchema.methods.generateRefreshToken = function () {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
           
