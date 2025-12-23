@@ -5,7 +5,7 @@ import { uploadToCloudinary } from '../utils/cloudinary.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import cookieParser from 'cookie-parser';
 import jwt from "jsonwebtoken"
-import { subscription } from '../models/user.subscribers.js';
+import { subscription } from '../models/subscribers.model.js';
 import mongoose from 'mongoose';
 
 const generateAccessandRefreshToken = async(userId) => {
@@ -474,5 +474,6 @@ export {
     updateAccountDetails,
     updateAvataar,
     updateCoverImage, 
-    getUserChannelProfile    
+    getUserChannelProfile ,
+    getChannelHistory   
 };
