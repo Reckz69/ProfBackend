@@ -1,0 +1,31 @@
+import { Router } from "express";
+import { 
+    createPlaylist,
+    getUserPlaylists,
+    getPlaylistById,
+    updatePlaylist,
+    deletePlaylist,
+    addVideosToPlaylist,
+    removeVideosFromPlaylist
+ } from "../controllers/playlist.controllers";
+
+ import { verifyJWT } from "../middlewares/auth.middleware";    
+
+const router = Router();
+
+router.use(verifyJWT);
+
+router.route("/").post(createPlaylist)
+
+router.route("user/:userId").get(getUserPlaylists);
+
+router.route("/:playlistId")
+    .get(getPlaylistById)
+    .patch(updatePlaylist)
+    .delete(deletePlaylist);
+
+router.route("/add/:videoId/:playlistId").patch(addVideosToPlaylist);
+
+router.route("/remove/:videoId/:playlistId").patch(removeVideosFromPlaylist);
+
+export default router;
