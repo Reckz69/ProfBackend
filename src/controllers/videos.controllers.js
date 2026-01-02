@@ -300,9 +300,39 @@ const deleteVideo = asyncHandler(async(req, res) => {
     return res
         .status(200)
         .json(new ApiResponse(200,{}, "Video file Deleted successfully"));
+});
+
+const getVideoViews = asyncHandler(async(req, res) => {
+    const {videoId} = req.params;
+
+    if(!videoId?.trim()){
+        throw new ApiError(400, "videoId is required")
+    }
+
+    if(!isValidObjectId(videoId)){
+        throw new ApiError(400, "Invalid videoId")
+    }
+
+    const video = await Video.findByIdAndUpdate(
+        videoId,
+        {
+            $inc: {views: 1},
+        },
+        {
+            new: true,
+        }
+    )
+
+    if(!video){
+        throw new ApiError(404, " video Not Found");
+    }
+
+    return res 
+        .status(200)
+        .json(new ApiResponse(200, {views: video.views}, "Video view count updated"))
 })
 
-const togglePubllishedStatus = asyncHandler(async(req, res) => {
+const togglePublishedStatus = asyncHandler(async(req, res) => {
     const {videoId} = req.params;
 
     if(!videoId?.trim()){
@@ -344,5 +374,6 @@ export{
     getVideoById,
     updateVideo,
     deleteVideo,
-    togglePubllishedStatus,
+    togglePublishedStatus,
+    getVideoViews,
 }

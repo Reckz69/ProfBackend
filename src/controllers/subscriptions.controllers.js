@@ -1,12 +1,13 @@
 import { isValidObjectId } from "mongoose";
-import { User } from "../models/user.models";
-import { subscription } from "../models/channelSubscribed.model";
+import { User } from "../models/user.models.js";
+import { subscription } from "../models/subscription.model.js";
 import { ApiError } from "../utils/ApiError";
 import { ApiResponse } from "../utils/ApiResponse";
 import { asyncHandler } from "../utils/asyncHandler";
 
 const toggleSubscription = asyncHandler(async(req, res) => {
     const {channelId} = req.params;
+
     if(!isValidObjectId(channelId)){
         throw new ApiError(400, "Invalid channel Id")
     }
@@ -25,34 +26,34 @@ const toggleSubscription = asyncHandler(async(req, res) => {
     }
 
     const subscriptionRecord = await subscription.findOne({
-        channelId: channelId,
+        channel: channelId,
         subscriber: req.user._id,
     })
 
     if(subscriptionRecord){
         await subscriptionRecord.deleteOne();
 
-        res
-        .status(200)
-        .json(new ApiResponse(200, {}, "Subscription Removed Successsfully"))
+        return res
+            .status(200)
+            .json(new ApiResponse(200, {}, "Subscription Removed Successfully"))
     } 
 
     const newSubscription = await subscription.create({
-        channelId: channelId,
+        channel: channelId,
         subscriber: req.user._id,
-    }).select("__v");
+    });
 
     return res
     .status(200)
     .json(
-        new ApiResponse(200, channelSubscribed, "subscriber addded successfully" )
+        new ApiResponse(200, newSubscription, "subscriber addded successfully" )
     );
     });
 
 //controller to return subscriber list of channels
 
 const getUserChannelSubscribers = asyncHandler(async(req, res) => {
-    const channelId = req.params;
+    const {channelId} = req.params;
 
     if(!isValidObjectId(channelId)){
         throw new ApiError("Invalid channelId")
@@ -82,13 +83,13 @@ const getUserChannelSubscribers = asyncHandler(async(req, res) => {
 //getting the channels list of the user
 
 const getSubscribedChannels = asyncHandler(async(req, res) => {
-    const channelId = req.params;
+    const {channelId} = req.params;
 
     if(!isValidObjectId(channelId)){
         throw new ApiError("Invalid channelId")
     }
 
-    const existingUser = await user.findById(channelId);
+    const existingUser = await User.findById(channelId);
 
     if(!existingUser){
         throw new ApiError(400, "User not found")
