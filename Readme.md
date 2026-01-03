@@ -19,6 +19,7 @@ A production-grade backend architecture for a video hosting platform. This proje
 
 ### 📊 Complex Data Aggregation
 - Leveraged **MongoDB Aggregation Pipelines** to compute real-time metrics such as subscriber counts, channel stats, and personalized watch histories.
+- Check out the [Detailed Aggregation Pipeline Documentation](./AGGREGATIONS.md) 
 - Used `mongoose-aggregate-paginate-v2` for efficient, paginated data retrieval.
 
 ### ☁️ Media Handling
@@ -39,3 +40,4 @@ A production-grade backend architecture for a video hosting platform. This proje
 2. Install dependencies: `npm install`
 3. Configure `.env` (JWT_SECRET, CLOUDINARY_URL, MONGODB_URI)
 4. Start server: `npm run dev`
+
