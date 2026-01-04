@@ -10,7 +10,7 @@ A production-grade backend architecture for a video hosting platform. This proje
 - **Database:** MongoDB with Mongoose
 - **Media Management:** Cloudinary API & Multer Middleware
 - **Security:** JWT (Access/Refresh Tokens) & Bcrypt
-- **Utilities:** Postman for API testing
+- **Utilities:** Postman for API testing. [Access the Documentation](./TESTING.md)
 
 ## 🚀 Key Features & Implementation
 ### 🔐 Advanced Authentication
@@ -36,9 +36,19 @@ A production-grade backend architecture for a video hosting platform. This proje
 
 ---
 ## 🧪 Local Setup
-1. Clone the repo: `git clone ...`
+1. ## ⚙️ Installation & Local Setup
+
+### 1. Clone the Repository
+
+  git clone [https://github.com/Reckz69/ProfBackend.git](https://github.com/Reckz69/ProfBackend.git)
+  cd ProfBackend
+
+
 2. Install dependencies: `npm install`
-3. Configure `.env` (JWT_SECRET, CLOUDINARY_URL, MONGODB_URI)
-4. Start server: `npm run dev`
+3. Configure [.env](./.env) (JWT_SECRET, CLOUDINARY_URL, MONGODB_URI)
+4. Start server: 
+      Development mode (with nodemon): `npm run dev`
+      Production mode: `npm star`
+
 
 
