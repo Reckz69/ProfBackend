@@ -32,7 +32,7 @@ A production-grade backend architecture for a video hosting platform. This proje
 
 ## 🛣️ API Roadmap (Next Phases)
 - [ ] Phase 2: Frontend integration with React & Tailwind CSS.
-- [ ] Phase 3: Deployment on AWS/DigitalOcean with CI/CD.
+- [ ] Phase 3: Deployment on Render/Vercel with CI/CD.
 
 ---
 ## 🧪 Local Setup
@@ -40,4 +40,5 @@ A production-grade backend architecture for a video hosting platform. This proje
 2. Install dependencies: `npm install`
 3. Configure `.env` (JWT_SECRET, CLOUDINARY_URL, MONGODB_URI)
 4. Start server: `npm run dev`
+
 
