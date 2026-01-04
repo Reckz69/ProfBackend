@@ -55,83 +55,106 @@ if (pm.response.code === 200) {
 }
 
 
-The backend is an Express.js app with a base API prefix of /api/v1. I grouped endpoints into folders based on feature modules. There are 42 requests total.
+# 🚀 API Documentation
 
-1. Users
-Typical auth and profile flows:
+# 🚀 API Documentation
 
-POST /api/v1/users/register – Register user
-POST /api/v1/users/login – Login user
-POST /api/v1/users/logout – Logout user
-POST /api/v1/users/refresh-token – Refresh access token
-POST /api/v1/users/change-password – Change password
-GET  /api/v1/users/me – Get current logged-in user
-PATCH /api/v1/users/update-account – Update basic account details
-PATCH /api/v1/users/avatar – Update avatar (multipart/form-data with file)
-PATCH /api/v1/users/cover-image – Update cover image (multipart/form-data with file)
-GET  /api/v1/users/c/{channelId} – Get channel profile
-GET  /api/v1/users/history – Get watch history
-Most of these use Authorization: Bearer {{access_token}}.
+This backend is an **Express.js** application with a base API prefix of `/api/v1`. The architecture is modular, with **42 total requests** organized by feature.
 
-2. Videos
-CRUD and publish operations for videos:
+---
 
-GET    /api/v1/videos – Get all videos (supports query filters)
-POST   /api/v1/videos – Publish video (multipart/form-data: video file, thumbnail, title, description)
-GET    /api/v1/videos/:videoId – Get video by ID
-PATCH  /api/v1/videos/:videoId – Update video details
-DELETE /api/v1/videos/:videoId – Delete video
-PATCH  /api/v1/videos/:videoId/toggle-publish – Toggle publish status
-GET    /api/v1/videos/:videoId/views – Get views count (if implemented in code)
-3. Subscriptions
-Subscribe / unsubscribe channels and list subscriptions:
+## 🛠️ Authentication & Security
+Most protected routes require the following header:  
+`Authorization: Bearer {{access_token}}`
 
-GET  /api/v1/subscriptions/channels – Get channels the user subscribed to
-POST /api/v1/subscriptions/c/:channelId – Toggle channel subscription
-GET  /api/v1/subscriptions/c/:channelId/subscribers – Get subscribers of a channel
-4. Playlists
-Playlist management and video association:
+---
 
-POST   /api/v1/playlists – Create playlist
-GET    /api/v1/playlists/user/:userId – Get user playlists
-GET    /api/v1/playlists/:playlistId – Get playlist by ID
-PATCH  /api/v1/playlists/:playlistId – Update playlist details
-DELETE /api/v1/playlists/:playlistId – Delete playlist
-POST   /api/v1/playlists/:playlistId/videos/:videoId – Add video to playlist
-DELETE /api/v1/playlists/:playlistId/videos/:videoId – Remove video from playlist
-5. Dashboard
-Channel-level stats:
+## 1. Users Module
+*Handles authentication flows, profile management, and watch history.*
 
-GET /api/v1/dashboard/stats – Get channel statistics
-GET /api/v1/dashboard/videos – Get channel videos for dashboard
-6. Tweets
-Short text posts:
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **POST** | `/users/register` | Register new user (Multipart/form-data) |
+| **POST** | `/users/login` | Login user & receive tokens |
+| **POST** | `/users/logout` | Logout user |
+| **POST** | `/users/refresh-token` | Generate new access token |
+| **POST** | `/users/change-password` | Change account password |
+| **GET** | `/users/me` | Get current logged-in user |
+| **PATCH** | `/users/update-account` | Update basic account details |
+| **PATCH** | `/users/avatar` | Update avatar (Multipart/form-data) |
+| **PATCH** | `/users/cover-image` | Update cover image (Multipart/form-data) |
+| **GET** | `/users/c/{channelId}` | Get specific channel profile |
+| **GET** | `/users/history` | Get watch history |
 
-POST   /api/v1/tweets – Create tweet
-GET    /api/v1/tweets/user/:userId – Get user tweets
-PATCH  /api/v1/tweets/:tweetId – Update tweet
-DELETE /api/v1/tweets/:tweetId – Delete tweet
-7. Comments
-Video comments:
+---
 
-GET    /api/v1/comments/:videoId – Get comments for a video
-POST   /api/v1/comments/:videoId – Add comment to a video
-PATCH  /api/v1/comments/:commentId – Update comment
-DELETE /api/v1/comments/:commentId – Delete comment
-8. Likes
-Like toggles across entities:
+## 2. Videos Module
+*CRUD and publish operations for video content.*
 
-POST /api/v1/likes/video/:videoId – Toggle like on video
-GET  /api/v1/likes/videos – Get all liked videos for user
-POST /api/v1/likes/tweet/:tweetId – Toggle like on tweet
-POST /api/v1/likes/comment/:commentId – Toggle like on comment
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **GET** | `/videos` | Get all videos (supports query filters) |
+| **POST** | `/videos` | Publish video (Multipart/form-data) |
+| **GET** | `/videos/:videoId` | Get video by ID |
+| **PATCH** | `/videos/:videoId` | Update video details |
+| **DELETE** | `/videos/:videoId` | Delete video |
+| **PATCH** | `/videos/:videoId/toggle-publish` | Toggle publish status |
+| **GET** | `/videos/:videoId/views` | Get views count |
 
+---
 
-How to use the collection
-Start your backend on the same port used in code (the collection assumes {{base_url}} = http://localhost:3000).
-In Postman, set an environment variable:
-base_url = http://localhost:3000
-Use the Register and Login requests in the Users folder.
-From the Login response, copy the access token and set:
-access_token = <JWT>
-in your environment, so all protected requests will work.
+## 3. Subscriptions Module
+*Manage channel subscriptions and subscriber counts.*
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **GET** | `/subscriptions/channels` | Get channels user is subscribed to |
+| **POST** | `/subscriptions/c/:channelId` | Toggle channel subscription |
+| **GET** | `/subscriptions/c/:channelId/subscribers` | Get subscribers of a channel |
+
+---
+
+## 4. Playlists Module
+*Playlist management and video organization.*
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **POST** | `/playlists` | Create playlist |
+| **GET** | `/playlists/user/:userId` | Get user playlists |
+| **GET** | `/playlists/:playlistId` | Get playlist by ID |
+| **PATCH** | `/playlists/:playlistId` | Update playlist details |
+| **DELETE** | `/playlists/:playlistId` | Delete playlist |
+| **POST** | `/playlists/:playlistId/videos/:videoId` | Add video to playlist |
+| **DELETE** | `/playlists/:playlistId/videos/:videoId` | Remove video from playlist |
+
+---
+
+## 5. Dashboard Module
+*Creator-level statistics and video management.*
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **GET** | `/dashboard/stats` | Get channel statistics |
+| **GET** | `/dashboard/videos` | Get channel videos for dashboard |
+
+---
+
+## 6. Tweets Module
+*Short-form text posts.*
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **POST** | `/tweets` | Create tweet |
+| **GET** | `/tweets/user/:userId` | Get user tweets |
+| **PATCH** | `/tweets/:tweetId` | Update tweet |
+| **DELETE** | `/tweets/:tweetId` | Delete tweet |
+
+---
+
+## 7. Comments Module
+*Video discussion and engagement.*
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| **GET** | `/comments/:videoId` | Get comments for a video |
+| **POST** | `/comments/:videoId` | Add comment toideos for the user
