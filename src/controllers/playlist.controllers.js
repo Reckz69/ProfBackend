@@ -1,5 +1,5 @@
-import { asyncHandler } from "../utils/asyncHandler";
-import Playlist from "../models/playlist.model.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import {Playlist} from "../models/playlist.models.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import mongoose , {isValidObjectId} from "mongoose";
@@ -60,6 +60,10 @@ const getUserPlaylists = asyncHandler(async (req, res) => {
     const userplaylists = await Playlist.find({
         owner: userId,
     })
+
+    if(!userplaylists.length){
+        throw new ApiError(404, "No playlists found for this user");
+    }
 
     return res
         .status(200)

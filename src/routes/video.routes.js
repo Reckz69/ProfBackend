@@ -5,42 +5,41 @@ import {
     getVideoById,
     updateVideo,
     deleteVideo,
-    togglePubllishedStatus,
- } from "../controllers/videos.controllers";
+    togglePublishedStatus,
+    getVideoViews
+ } from "../controllers/videos.controllers.js";
 
- import { verifyJWT } from "../middlewares/auth.middleware";
- import { upload } from "../middlewares/multer.middleware";
+ import { verifyJWT } from "../middlewares/auth.middleware.js";
+ import { upload } from "../middlewares/multer.middleware.js";
 
- const router = Router();
- router.use(verifyJWT);
+const router = Router();
+router.use(verifyJWT);
 
- router
-    .route("/")
-    .get(getAllVideos)
-    .post(
-        upload.fields([
-            {
-                name: "videoFile",
-                maxCount: 1,
-            },
-            {
-                name: "thumbnail",
-                maxCount: 1,
-            }
-        ]),
-        publishVideo
-        )
-    
+// GET all videos, CREATE video
 router
-    .route("/:videoId")
-    .get(getVideoById)
-    .delete(deleteVideo)
-    .patch(upload.single("thumbnail"), updateVideo);
+  .route("/")
+  .get(getAllVideos)
+  .post(
+    upload.fields([
+      { name: "videoFile", maxCount: 1 },
+      { name: "thumbnail", maxCount: 1 }
+    ]),
+    publishVideo
+  );
 
+// specific routes FIRST
+router.patch("/views/:videoId", getVideoViews);
+router.patch("/toggle/:videoId", togglePublishedStatus);
+
+// dynamic route LAST
 router
-    .route("/toggle/publish/:videoId").patch(togglePubllishedStatus);
+  .route("/:videoId")
+  .get(getVideoById)
+  .delete(deleteVideo)
+  .patch(upload.single("thumbnail"), updateVideo);
 
-export default router
+export default router;
+
     
 
     

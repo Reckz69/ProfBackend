@@ -7,9 +7,9 @@ import {
     deletePlaylist,
     addVideosToPlaylist,
     removeVideosFromPlaylist
- } from "../controllers/playlist.controllers";
+ } from "../controllers/playlist.controllers.js";
 
- import { verifyJWT } from "../middlewares/auth.middleware";    
+ import { verifyJWT } from "../middlewares/auth.middleware.js";    
 
 const router = Router();
 
@@ -17,7 +17,7 @@ router.use(verifyJWT);
 
 router.route("/").post(createPlaylist)
 
-router.route("user/:userId").get(getUserPlaylists);
+router.route("/user/:userId").get(getUserPlaylists);
 
 router.route("/:playlistId")
     .get(getPlaylistById)

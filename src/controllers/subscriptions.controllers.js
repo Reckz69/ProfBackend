@@ -1,9 +1,9 @@
 import { isValidObjectId } from "mongoose";
 import { User } from "../models/user.models.js";
-import { subscription } from "../models/subscription.model.js";
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { Subscription } from "../models/subscription.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const toggleSubscription = asyncHandler(async(req, res) => {
     const {channelId} = req.params;
@@ -25,7 +25,7 @@ const toggleSubscription = asyncHandler(async(req, res) => {
         );
     }
 
-    const subscriptionRecord = await subscription.findOne({
+    const subscriptionRecord = await Subscription.findOne({
         channel: channelId,
         subscriber: req.user._id,
     })
@@ -38,7 +38,7 @@ const toggleSubscription = asyncHandler(async(req, res) => {
             .json(new ApiResponse(200, {}, "Subscription Removed Successfully"))
     } 
 
-    const newSubscription = await subscription.create({
+    const newSubscription = await Subscription.create({
         channel: channelId,
         subscriber: req.user._id,
     });
@@ -65,7 +65,7 @@ const getUserChannelSubscribers = asyncHandler(async(req, res) => {
         throw new ApiError(400, "User not found")
     }
 
-    const channelSubscribed = await subscription.find({
+    const channelSubscribed = await Subscription.find({
         channel: channelId
     }).populate({
         path: "subscriber",
@@ -75,7 +75,7 @@ const getUserChannelSubscribers = asyncHandler(async(req, res) => {
     return res
     .status(200)
     .json(
-        new ApiResponse(200, channelSubscribed, "channelSubscribed list fetched successfully")
+        new ApiResponse(200, channelSubscribed, "channel Subscribers list fetched successfully")
     )
 
 })
@@ -95,7 +95,7 @@ const getSubscribedChannels = asyncHandler(async(req, res) => {
         throw new ApiError(400, "User not found")
     }
 
-    const channelSubscribed = await subscription.find({
+    const channelSubscribed = await Subscription.find({
         subscriber: channelId
     }).populate({
         path: "channel",
@@ -105,7 +105,7 @@ const getSubscribedChannels = asyncHandler(async(req, res) => {
     return res
     .status(200)
     .json(
-        new ApiResponse(200, channelSubscribed, "channel Subscribed list fetched successfully")
+        new ApiResponse(200, channelSubscribed, "channels Subscribed list fetched successfully")
     )
 
 });

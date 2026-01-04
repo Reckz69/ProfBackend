@@ -1,14 +1,14 @@
-import { asyncHandler } from "../utils/asyncHandler";   
-import { ApiError } from "../utils/ApiError";
-import { ApiResponse } from "../utils/ApiResponse";
-import { Like } from "../models/like.models";
-import { Video } from "../models/video.models";
-import { Comment } from "../models/comment.models";
-import { Tweet } from "../models/tweet.models";
-import { subscription } from "../models/subscription.model";
+import { asyncHandler } from "../utils/asyncHandler.js";   
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { Like } from "../models/like.models.js";
+import { Video } from "../models/video.models.js";
+import { Comment } from "../models/comment.models.js";
+import { Tweet } from "../models/tweet.models.js";
+import { Subscription } from "../models/subscription.model.js";
 import { isValidObjectId } from "mongoose";
 
-const getDashboardStats = asyncHandler(async (req, res) => {
+const getChannelStats = asyncHandler(async (req, res) => {
     const totalVideoViews = await Video.aggregate([
         {   $match:
             { owner: req.user._id }
@@ -26,7 +26,7 @@ const getDashboardStats = asyncHandler(async (req, res) => {
         }
     ]);
 
-    const totalSubscribers = await subscription.aggregate([
+    const totalSubscribers = await Subscription.aggregate([
         {
             $match: {
                 channel: req.user._id
@@ -143,7 +143,7 @@ const getChannelVideos = asyncHandler(async (req, res) => {
 });
 
 export {
-    getDashboardStats,
+    getChannelStats,
     getChannelVideos
 };
 
