@@ -49,6 +49,11 @@ A production-grade backend architecture for a video hosting platform. This proje
 4. Start server: 
       Development mode (with nodemon): `npm run dev`
       Production mode: `npm star`
+   
+---
+## 📜 Credits & Acknowledgments
+- This project was built as part of a deep dive into backend engineering, following the architectural patterns inspired by the [Chai aur Code](https://github.com/hiteshchoudhary) backend series.
+- **Custom Enhancements:** Expanded the core logic to includes - Expanded aggregation pipelines, Controllers, Routes, Models, Detailed Postman documentation, etc
 
 
 
