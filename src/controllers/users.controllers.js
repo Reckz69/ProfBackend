@@ -54,16 +54,18 @@ const registerUser = asyncHandler(async(req, res) => {
     const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
 
     // Check for required avataar (This is the original check)
-    if(!avataarLocalPath){
-        throw new ApiError(400, 'Avataar is required'); // ⬅️ The error is pointing here!
-    }
+ //   if (!avataarLocalPath) {
+ //       throw new ApiError(400, 'Avataar file is required');
+ //   }
 
     // --- File Upload Logic ---
     let avataar = null;
-    try {
-        avataar = await uploadToCloudinary(avataarLocalPath);
-    } catch (err) {
-        console.error('Avataar upload error:', err);
+    if (avataarLocalPath){
+        try {
+            avataar = await uploadToCloudinary(avataarLocalPath);
+        } catch (err) {
+            console.error('Avataar upload error:', err);
+        }
     }
 
     let coverImage = null;
@@ -76,18 +78,18 @@ const registerUser = asyncHandler(async(req, res) => {
     }
 
     // Check if the required avataar upload was successful
-    if(!avataar){
-        console.error('Avataar upload failed for path:', avataarLocalPath);
-        throw new ApiError(500, 'Avataar upload failed, please try again'); 
-    }
+    //if(!avataar){
+       // console.error('Avataar upload failed for path:', avataarLocalPath);
+       // throw new ApiError(500, 'Avataar upload failed, please try again'); 
+    //}
 
     // --- DB Creation ---
     const user = await User.create({
         fullName,
-        username : username.toLowerCase(),
+        username : username,
         email,
         password,
-        avataar: avataar.url,
+        avataar: avataar?.url,
         // Use optional chaining for safety
         coverImage: coverImage?.url || '', 
     })

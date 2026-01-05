@@ -27,7 +27,7 @@ const userSchema = new Schema(
        },
        avataar : {
         type:String, // couldinary data or link to image
-        required:true
+        required:false
        },
        coverImage: {
         type:String, // couldinary data or link to image
