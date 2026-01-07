@@ -1,59 +1,62 @@
-import { useState } from "react";
-import { registerUser } from "../api/axios.js";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { registerUser } from "../api/axios";
 
-const Register = () => {
-  const [avatar, setAvatar] = useState(null);
-  const [coverImage, setCoverImage] = useState(null);
-  const [error, setError] = useState("");
+const ProfileSetup = () => {
+  const { state } = useLocation();
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
+  const [avatar, setAvatar] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
 
-    try {
-      const formData = new FormData();
-      formData.append("avatar", avatar);
-      formData.append("coverImage", coverImage);
-
-      const res = await registerUser(formData);
-      console.log(res.data);
-
-      navigate("/login");
-    } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+  useEffect(() => {
+    if (!state) {
+      navigate("/register");
     }
+  }, []);
+
+  const handleSubmit = async () => {
+    if (!avatar || !coverImage) {
+      alert("Please upload both avatar and cover image");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("name", state.name);
+    formData.append("username", state.username);
+    formData.append("email", state.email);
+    formData.append("password", state.password);
+
+    formData.append("avatar", avatar);
+    formData.append("coverImage", coverImage);
+
+    await registerUser(formData);
+
+    navigate("/login");
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 border rounded">
-      <h2 className="text-2xl mb-4">Register</h2>
+    <div>
+      <h2>Setup Profile</h2>
 
-      {error && <p className="text-red-500 mb-2">{error}</p>}
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setAvatar(e.target.files[0])}
+      />
 
-      <form onSubmit={handleRegister} className="flex flex-col gap-4">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => setCoverImage(e.target.files[0])}
+      />
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setAvatar(e.target.files[0])}
-          required
-        />
-
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setCoverImage(e.target.files[0])}
-          required
-        />
-
-        <button type="submit" className="bg-green-600 text-white p-2 rounded">
-          Register
-        </button>
-
-      </form>
+      <button type="button" onClick={handleSubmit}>
+        Complete Registration
+      </button>
     </div>
   );
 };
 
-export default Register;
+export default ProfileSetup;
