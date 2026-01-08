@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 
+app.disable("etag");  //disable etag to prevent caching of responses
+
 //cross origin resource sharing(CORS) configuration
 app.use(cors({
     origin: process.env.CORS_ORIGIN,

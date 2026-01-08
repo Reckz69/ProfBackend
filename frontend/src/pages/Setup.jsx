@@ -6,7 +6,7 @@ const ProfileSetup = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const [avatar, setAvatar] = useState(null);
+  const [avataar, setAvataar] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
 
   useEffect(() => {
@@ -16,24 +16,24 @@ const ProfileSetup = () => {
   }, []);
 
   const handleSubmit = async () => {
-    if (!avatar || !coverImage) {
-      alert("Please upload both avatar and cover image");
+    if (!avataar || !coverImage) {
+      alert("Please upload both avataar and cover image");
       return;
     }
 
     const formData = new FormData();
 
-    formData.append("name", state.name);
+    formData.append("fullName", state.fullName);
     formData.append("username", state.username);
     formData.append("email", state.email);
     formData.append("password", state.password);
 
-    formData.append("avatar", avatar);
+    formData.append("avataar", avataar);
     formData.append("coverImage", coverImage);
 
     await registerUser(formData);
 
-    navigate("/login");
+    navigate("/Login");
   };
 
   return (
@@ -43,7 +43,7 @@ const ProfileSetup = () => {
       <input
         type="file"
         accept="image/*"
-        onChange={(e) => setAvatar(e.target.files[0])}
+        onChange={(e) => setAvataar(e.target.files[0])}
       />
 
       <input
