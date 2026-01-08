@@ -3,13 +3,18 @@ import Navbar from "../components/Navbar";
 
 const MainLayout = () => {
   return (
-    <>
+    <div className="min-h-screen bg-gray-950 text-gray-100">
+      
+      {/* Top Navigation */}
       <Navbar />
-      <h1>Layout is Loading!</h1> {/* Add this */}
-      <main className="max-w-7xl mx-auto p-4">
+
+      {/* Page Content */}
+      <main className="max-w-[1400px] mx-auto px-4 py-6">
         <Outlet />
       </main>
-    </>
+
+    </div>
   );
 };
+
 export default MainLayout;

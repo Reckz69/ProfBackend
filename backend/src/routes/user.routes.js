@@ -32,11 +32,23 @@ router.route('/register').post(
 
 router.route("/login").post(loginUser)
 
+router.get(
+  "/me",
+  (req, res, next) => {
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+    res.setHeader("Surrogate-Control", "no-store");
+    next();
+  },
+  verifyJWT,
+  getCurrentUser
+);
+
 //secured Routes
 router.route("/logout").post(verifyJWT, loggedOutUser )
 router.route("/refresh-token").post(refreshAccessToken)
 router.route("/change-password").post(verifyJWT, changeCurrentPassword)
-router.route("/me").get(verifyJWT, getCurrentUser)
 router.route("/update/details").patch(verifyJWT, updateAccountDetails)
 router.route("/update/avataar").patch(verifyJWT, upload.single("avataar"), updateAvataar)
 router.route("/update/cover-image").patch(verifyJWT, upload.single("coverImage"), updateCoverImage)
