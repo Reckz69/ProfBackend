@@ -10,8 +10,10 @@ import { isValidObjectId } from "mongoose";
 
 const getChannelStats = asyncHandler(async (req, res) => {
     const totalVideoViews = await Video.aggregate([
-        {   $match:
-            { owner: req.user._id }
+        {
+            $match: {
+                owner: req.user._id
+            }
         },
         {
             $group: {
@@ -22,6 +24,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
         {
             $project: {
                 _id: 0,
+                totalViews: 1
             }
         }
     ]);
