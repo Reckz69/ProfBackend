@@ -1,6 +1,7 @@
 import {asyncHandler} from '../utils/asyncHandler.js';
 import { ApiError } from '../utils/ApiError.js';
 import { User} from '../models/user.models.js';
+import { Video } from '../models/video.models.js';
 import { uploadToCloudinary } from '../utils/cloudinary.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import jwt from 'jsonwebtoken';
@@ -476,6 +477,40 @@ const getChannelHistory = asyncHandler(async(req, res) => {
     )
 })
 
+const getTotalViews = asyncHandler(async(req, res) => {
+    const totalViews = await Video.aggregate([
+        {
+            $match: {
+                owner: req.user._id
+            }
+        },
+        {
+            $group: {
+                _id: null,
+                totalViews: { $sum: "$views" }
+            }
+        },
+        {
+            $project: {
+                _id: 0,
+                totalViews: 1
+            }
+        }
+    ]);
+
+    const totalViewsCount = totalViews[0]?.totalViews ?? 0;
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                { totalViews: totalViewsCount },
+                "Total views fetched successfully"
+            )
+        );
+})
+
 
 
 export {    
@@ -489,5 +524,6 @@ export {
     updateAvataar,
     updateCoverImage, 
     getUserChannelProfile ,
-    getChannelHistory   
+    getChannelHistory,
+    getTotalViews
 };

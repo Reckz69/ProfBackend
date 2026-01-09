@@ -33,6 +33,8 @@ export const getCurrentUser = () => {
   return API.get("/users/me");
 };
 
-export const logoutUser = () => API.post("/users/logout");
+export const logoutUser = () =>{
+ return API.post("/users/logout")
+};
 
 export default API;

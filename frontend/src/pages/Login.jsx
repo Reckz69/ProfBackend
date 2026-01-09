@@ -9,6 +9,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const {login} = useAuth();
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ const Login = () => {
       const { user, accessToken, refreshToken } = res.data.data;
 
       login(user); // Update auth context 
-      navigate("/"); // Redirect after login
+      navigate(from, { replace: true }); // Redirect after login
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
@@ -47,7 +48,7 @@ const Login = () => {
           required
         />
         <button type="submit" className="bg-blue-600 text-white p-2 rounded">
-          Next
+          Login
         </button>
       </form>
     </div>
