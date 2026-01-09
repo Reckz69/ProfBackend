@@ -1,126 +1,155 @@
+import { 
+  Cpu, Layers, ShieldCheck, BarChart3, Zap, ArrowRight, 
+  Server, Monitor, Sparkles, Box, Radio, Trello
+} from "lucide-react";
+import { Link } from "react-router-dom";
+
 const About = () => {
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 via-blue-50/30 to-purple-50/30">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">
-            About This{" "}
-            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Project
-            </span>
+    <div className="min-h-screen bg-[#050505] text-white selection:bg-indigo-500 pb-32 relative overflow-hidden font-sans">
+      
+      {/* --- GOD-LEVEL AMBIENT BACKGROUND --- */}
+      {/* Cinematic Noise Texture Overlay */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      
+      {/* Floating Interactive Orbs */}
+      <div className="absolute top-[-10%] left-[-10%] w-[70%] h-[70%] bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.15)_0%,_transparent_60%)] blur-[120px] animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-[radial-gradient(circle_at_center,_rgba(6,182,212,0.1)_0%,_transparent_60%)] blur-[120px]" />
+      
+      {/* Grid Floor Effect */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
+      <div className="max-w-7xl mx-auto px-6 pt-32 relative z-10">
+        
+        {/* --- KINETIC HERO SECTION --- */}
+        <div className="mb-40 text-center md:text-left">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl text-indigo-400 text-[10px] font-black tracking-[0.5em] uppercase mb-10 animate-bounce-slow">
+            <Sparkles size={14} className="text-cyan-400" /> System Genesis v2.0
+          </div>
+          
+          <h1 className="text-7xl md:text-[11rem] font-black italic tracking-tighter uppercase leading-[0.75] mb-12">
+            The <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/20">Infinite</span> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400">ProjectX.</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A modern, full-stack web application built with cutting-edge technologies
-          </p>
-        </div>
 
-        {/* Main Content */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 p-8 md:p-12 mb-12">
-          <div className="prose prose-lg max-w-none">
-            <p className="text-gray-700 leading-relaxed text-lg mb-6">
-              This project is a comprehensive content management platform built using modern web technologies.
-              It combines the power of React for the frontend with a robust Node.js backend, providing a
-              seamless and scalable user experience.
+          <div className="flex flex-col md:flex-row gap-12 items-end justify-between">
+            <p className="text-slate-400 max-w-xl text-xl md:text-2xl font-light leading-relaxed tracking-tight">
+              A high-precision video engine forged in the MERN stack, designed to bridge the gap between <span className="text-white font-bold">creative vision</span> and <span className="text-white font-bold">global scale.</span>
             </p>
+            <div className="hidden md:block h-px w-32 bg-gradient-to-r from-indigo-500 to-transparent mb-4" />
+          </div>
+        </div>
 
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 mt-8">Technology Stack</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-              <div className="p-6 bg-linear-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">⚛️</span>
-                  Frontend
-                </h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• React.js with modern hooks</li>
-                  <li>• Tailwind CSS for styling</li>
-                  <li>• React Router for navigation</li>
-                  <li>• Context API for state management</li>
-                </ul>
-              </div>
+        {/* --- BENTO ARCHITECTURE GRID --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-48">
+          
+          {/* Main Engine: Frontend */}
+          <div className="lg:col-span-2 group relative h-[500px] rounded-[4rem] overflow-hidden bg-gradient-to-b from-white/10 to-transparent p-[1px] hover:scale-[1.01] transition-all duration-700">
+            <div className="absolute inset-0 bg-[#0A0A0A] rounded-[4rem]" />
+            <div className="relative h-full p-12 flex flex-col justify-between overflow-hidden">
+               {/* Decorative Element */}
+               <div className="absolute -right-20 -top-20 w-80 h-80 bg-indigo-500/20 rounded-full blur-[80px] group-hover:bg-indigo-500/40 transition-colors duration-1000" />
+               
+               <div className="z-10">
+                 <Monitor size={48} className="text-indigo-500 mb-8 group-hover:rotate-12 transition-transform duration-500" />
+                 <h3 className="text-4xl font-black uppercase italic tracking-tighter mb-4">Neural Interface</h3>
+                 <p className="text-slate-500 font-medium">Built with React 18 & Framer Motion for liquid-smooth interactions.</p>
+               </div>
 
-              <div className="p-6 bg-linear-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <span className="text-2xl">🚀</span>
-                  Backend
-                </h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Node.js with Express</li>
-                  <li>• MongoDB with Mongoose</li>
-                  <li>• JWT authentication</li>
-                  <li>• RESTful API architecture</li>
-                </ul>
-              </div>
+               <div className="z-10 grid grid-cols-2 gap-4">
+                  <TechLabel label="Virtual DOM" />
+                  <TechLabel label="Tailwind Core" />
+                  <TechLabel label="Context Rehydration" />
+                  <TechLabel label="GPU Acceleration" />
+               </div>
             </div>
+          </div>
 
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 mt-10">Key Features</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-              <div className="p-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 bg-linear-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">Secure Authentication</h3>
-                <p className="text-gray-600 text-sm">
-                  JWT-based authentication system with secure token management
-                </p>
-              </div>
+          {/* Core Heart: Backend */}
+          <div className="lg:col-span-2 group relative h-[500px] rounded-[4rem] overflow-hidden bg-gradient-to-b from-white/10 to-transparent p-[1px] hover:scale-[1.01] transition-all duration-700">
+            <div className="absolute inset-0 bg-[#0A0A0A] rounded-[4rem]" />
+            <div className="relative h-full p-12 flex flex-col justify-between">
+               <div className="absolute -left-20 -bottom-20 w-80 h-80 bg-cyan-500/10 rounded-full blur-[80px] group-hover:bg-cyan-500/30 transition-colors duration-1000" />
+               
+               <div>
+                 <Server size={48} className="text-cyan-400 mb-8" />
+                 <h3 className="text-4xl font-black uppercase italic tracking-tighter mb-4">Core Singularity</h3>
+                 <p className="text-slate-500 font-medium">Node.js event-loop architecture handling millions of concurrent transmissions.</p>
+               </div>
 
-              <div className="p-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">Analytics Dashboard</h3>
-                <p className="text-gray-600 text-sm">
-                  Comprehensive analytics and insights for content performance
-                </p>
-              </div>
-
-              <div className="p-6 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 bg-linear-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">Media Management</h3>
-                <p className="text-gray-600 text-sm">
-                  Upload and manage images, videos, and multimedia content
-                </p>
-              </div>
+               <div className="grid grid-cols-2 gap-4">
+                  <TechLabel label="Express.js" />
+                  <TechLabel label="JWT Encryption" />
+                  <TechLabel label="Cloudinary SDK" />
+                  <TechLabel label="MongoDB Atlas" />
+               </div>
             </div>
           </div>
         </div>
 
-        {/* Footer CTA */}
-        <div className="text-center bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl p-8 md:p-12 shadow-xl">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Get Started?
-          </h2>
-          <p className="text-blue-100 mb-6 text-lg">
-            Join our platform and start building your content empire today
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="/register"
-              className="px-8 py-3 bg-white text-blue-600 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+        {/* --- PERFORMANCE HUD SECTION --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-48">
+          <FeatureHUD 
+            icon={<ShieldCheck size={32} />} 
+            title="Ironclad Security" 
+            desc="Stateless Auth via HTTP-only Cookies & JWT."
+            color="indigo"
+          />
+          <FeatureHUD 
+            icon={<Radio size={32} />} 
+            title="Active Streaming" 
+            desc="Low-latency VOD processing for instant playback."
+            color="cyan"
+          />
+          <FeatureHUD 
+            icon={<Box size={32} />} 
+            title="Asset Pipeline" 
+            desc="Automatic optimization for 4K video assets."
+            color="purple"
+          />
+        </div>
+
+        {/* --- THE GOD CTA --- */}
+        <div className="relative py-32 rounded-[5rem] overflow-hidden group">
+          <div className="absolute inset-0 bg-indigo-600 group-hover:bg-indigo-500 transition-colors duration-700" />
+          <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+          
+          <div className="relative z-10 text-center px-6">
+            <h2 className="text-6xl md:text-8xl font-black italic tracking-tighter uppercase mb-10 leading-none">
+              The Future <br /> Is <span className="text-black">ProjectX.</span>
+            </h2>
+            <Link 
+              to="/register" 
+              className="inline-flex items-center gap-4 bg-black text-white px-12 py-6 rounded-3xl font-black uppercase text-xs tracking-[0.5em] hover:bg-white hover:text-black transition-all duration-500 shadow-2xl"
             >
-              Create Account
-            </a>
-            <a
-              href="/login"
-              className="px-8 py-3 bg-blue-700/50 hover:bg-blue-700 text-white font-semibold rounded-xl border border-white/30 transition-all duration-300"
-            >
-              Sign In
-            </a>
+              Enter the Studio <ArrowRight size={20} />
+            </Link>
           </div>
         </div>
+
       </div>
     </div>
   );
 };
+
+/* --- ARTISTIC HELPERS --- */
+
+const TechLabel = ({ label }) => (
+  <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+    <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,1)]" />
+    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">{label}</span>
+  </div>
+);
+
+const FeatureHUD = ({ icon, title, desc, color }) => (
+  <div className="group flex flex-col items-center text-center">
+    <div className={`w-24 h-24 rounded-[2.5rem] bg-white/5 border border-white/10 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:border-${color}-500/50 transition-all duration-700 relative`}>
+      <div className={`absolute inset-0 bg-${color}-500/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity`} />
+      <div className={`text-${color}-400 relative z-10`}>{icon}</div>
+    </div>
+    <h4 className="text-xl font-black uppercase italic tracking-tighter mb-4">{title}</h4>
+    <p className="text-slate-500 font-medium leading-relaxed">{desc}</p>
+  </div>
+);
 
 export default About;

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getCurrentUser } from "../api/auth.js";
+import { getCurrentUser } from "../api/auth";
 
 const AuthContext = createContext(null);
 
@@ -11,51 +11,37 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  const logout = async () => {
-    try {
-      await logoutUser(); // backend call
-  
-      // clear frontend auth state
-      setUser(null);
-      setIsAuthenticated(false);
-  
-      // clear tokens if stored
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-  
-    } catch (error) {
-      console.error("Logout API failed:", error);
-    }
+  const logout = () => {
+    setUser(null);
   };
-  
-
 
   // 🔥 THIS FIXES REFRESH ISSUE
-useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const res = await getCurrentUser();
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await getCurrentUser();
+  
+        console.log("ME API FULL RESPONSE 👉", res.data);
+  
+        const userData =
+          res.data?.data?.user ||
+          res.data?.user ||
+          res.data?.data;
+  
+        setUser(userData);
+      } catch (err) {
+        console.log("Auth fetch failed", err);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchUser();
+  }, []);
+  
 
-      console.log("ME API FULL RESPONSE 👉", res.data);
-
-      const userData =
-        res.data?.data?.user ||
-        res.data?.user ||
-        res.data?.data;
-
-      setUser(userData);
-    } catch (err) {
-      console.log("Auth fetch failed", err);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchUser();
-}, []);
-
-
+ 
   return (
     <AuthContext.Provider
       value={{
