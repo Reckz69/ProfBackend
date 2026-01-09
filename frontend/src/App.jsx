@@ -1,36 +1,43 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home.jsx";
-import About from "./pages/About.jsx";
-import Login from "./pages/Login.jsx";
-import Register from "./pages/Register.jsx";
-import MainLayout from "./layouts/mainLayout.jsx";
-import Setup from "./pages/Setup.jsx";
-import ProtectedRoute from "./routes/ProtectedRoute.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import { AuthProvider } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast"; // For those nice notifications
+import MainLayout from "./layouts/MainLayout"; // Create this file (code below)
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Login from "./pages/Login";
+import Register from "./pages/Register"; // Import your new Register page
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
+import Explore from "./pages/Explore";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-
-          {/* Public Routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/setup-profile" element={<Setup />} />
-
-          {/* Protected Routes */}
-          <Route element={<ProtectedRoute />}>
+    <AuthProvider>
+      <BrowserRouter>
+        {/* Toaster allows your toast.success() calls to show up */}
+        <Toaster position="bottom-right" reverseOrder={false} />
+        
+        <Routes>
+          {/* Wrap all routes that need a Navbar in the MainLayout */}
+          <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} /> {/* Added this! */}
+            <Route path="/explore" element={<Explore/>}/>
+
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
           </Route>
-
-          {/* Optional public page */}
-          <Route path="/about" element={<About />} />
-
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
