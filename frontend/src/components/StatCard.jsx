@@ -2,7 +2,7 @@ const StatCard = ({ title, value, icon, gradient = "from-blue-500 to-blue-600" }
   return (
     <div className="group relative bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden">
       {/* Gradient accent bar */}
-      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${gradient}`}></div>
+      <div className={`absolute top-0 left-0 right-0 h-1 bg-linear-to-r ${gradient}`}></div>
       
       <div className="flex items-start justify-between">
         <div className="flex-1">
@@ -15,7 +15,7 @@ const StatCard = ({ title, value, icon, gradient = "from-blue-500 to-blue-600" }
         </div>
         
         {icon && (
-          <div className={`ml-4 p-3 rounded-xl bg-gradient-to-br ${gradient} text-white text-2xl shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
+          <div className={`ml-4 p-3 rounded-xl bg-linear-to-br ${gradient} text-white text-2xl shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
             {icon}
           </div>
         )}
@@ -23,7 +23,7 @@ const StatCard = ({ title, value, icon, gradient = "from-blue-500 to-blue-600" }
       
       {/* Subtle background pattern */}
       <div className="absolute bottom-0 right-0 w-32 h-32 opacity-5">
-        <div className={`w-full h-full bg-gradient-to-br ${gradient} rounded-full blur-2xl`}></div>
+        <div className={`w-full h-full bg-linear-to-br ${gradient} rounded-full blur-2xl`}></div>
       </div>
     </div>
   );

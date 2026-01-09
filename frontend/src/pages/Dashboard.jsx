@@ -27,7 +27,7 @@ const Dashboard = () => {
   if (loading) return <Loader />;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-blue-50/30 to-gray-50">
       {/* Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
