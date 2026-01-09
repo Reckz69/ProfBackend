@@ -3,8 +3,10 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import MainLayout from "./layouts/MainLayout";
+import MainLayout from "./layouts/mainLayout";
 import Setup from "./pages/Setup";
+import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
+import Dashboard from  "./pages/Dashboard.jsx";
 
 function App() {
   return (
@@ -16,6 +18,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/setup-profile" element={<Setup />} />
+
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>  
         </Route>
       </Routes>
     </BrowserRouter>
